@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Dashboard</title>
+    <meta http-equiv="refresh" content="30">
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 600px; margin: 50px auto; padding: 20px; }
+        .class-card { border: 1px solid #ddd; padding: 20px; margin: 15px 0; border-radius: 8px; }
+        .happening { border-left: 5px solid #28a745; }
+        .cancelled { border-left: 5px solid #dc3545; }
+        .substitute { border-left: 5px solid #ffc107; }
+        .pending { border-left: 5px solid #6c757d; }
+        .badge { padding: 6px 12px; border-radius: 4px; color: white; font-weight: bold; display: inline-block; }
+        .badge-happening { background: #28a745; }
+        .badge-cancelled { background: #dc3545; }
+        .badge-substitute { background: #ffc107; color: black; }
+        .badge-pending { background: #6c757d; }
+    </style>
+</head>
+<body>
+    <h2>Student Dashboard</h2>
+    <p>Today: {{ today }} | Auto-refreshes every 30 seconds</p>
+    {% if class_data %}
+        {% for cls in class_data %}
+        <div class="class-card {{ cls.status }}">
+            <h3>{{ cls.subject }}</h3>
+            <p>Time: {{ cls.class_time }}</p>
+            <span class="badge badge-{{ cls.status }}">
+                {% if cls.status == 'happening' %}Class is ON
+                {% elif cls.status == 'cancelled' %}Class CANCELLED
+                {% elif cls.status == 'substitute' %}Substitute: {{ cls.substitute_name }}
+                {% else %}Waiting for faculty response
+                {% endif %}
+            </span>
+        </div>
+        {% endfor %}
+    {% else %}
+        <p>No classes scheduled for today.</p>
+    {% endif %}
+</body>
+</html>

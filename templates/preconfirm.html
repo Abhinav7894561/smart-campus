@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Pre-Confirmation</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 600px; margin: 50px auto; padding: 20px; }
+        .class-card { border: 1px solid #ddd; padding: 15px; margin: 10px 0; border-radius: 8px; display: flex; align-items: center; gap: 15px; }
+        .btn { padding: 10px 20px; background: #28a745; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; margin-top: 20px; }
+        input[type="checkbox"] { width: 20px; height: 20px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <h2>Pre-Confirm Tomorrow's Classes</h2> 
+    {% if request.args.get('confirmed') %}
+<p style="color: green; font-weight: bold;">Classes confirmed for tomorrow!</p>
+{% endif %}
+    <p>Tomorrow: {{ tomorrow }}</p>
+    {% if classes %}
+    <form action="/preconfirm/submit" method="POST">
+        {% for cls in classes %}
+        <div class="class-card">
+            <input type="checkbox" name="schedule_ids" value="{{ cls.id }}" checked>
+            <div>
+                <strong>{{ cls.subject }}</strong>
+                <p style="margin:0">Time: {{ cls.class_time }} | Faculty: {{ cls.faculty_name }}</p>
+            </div>
+        </div>
+        {% endfor %}
+        <button class="btn" type="submit">Confirm Selected Classes</button>
+    </form>
+    {% else %}
+        <p>No classes scheduled for tomorrow.</p>
+    {% endif %}
+</body>
+</html>

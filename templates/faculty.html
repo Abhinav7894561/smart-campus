@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Faculty Page</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 600px; margin: 50px auto; padding: 20px; }
+        .class-card { border: 1px solid #ddd; padding: 20px; margin: 15px 0; border-radius: 8px; }
+        .btn { padding: 10px 20px; margin: 5px; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; }
+        .btn-yes { background: #28a745; color: white; }
+        .btn-no { background: #dc3545; color: white; }
+        .btn-sub { background: #ffc107; color: black; }
+        input[type="text"] { padding: 8px; margin: 5px; border: 1px solid #ddd; border-radius: 4px; }
+    </style>
+</head>
+<body>
+    <h2>Faculty Dashboard</h2>
+    <p>Today: {{ today }}</p>
+    {% if classes %}
+        {% for cls in classes %}
+        <div class="class-card">
+            <h3>{{ cls.subject }}</h3>
+            <p>Time: {{ cls.class_time }}</p>
+            <form action="/respond/{{ cls.id }}" method="POST">
+                <button class="btn btn-yes" name="status" value="happening">Yes, I'm Coming</button>
+                <button class="btn btn-no" name="status" value="cancelled">No, Cancel Class</button>
+                <br><br>
+                <input type="text" name="substitute_name" placeholder="Substitute name (if any)">
+                <button class="btn btn-sub" name="status" value="substitute">Send Substitute</button>
+            </form>
+        </div>
+        {% endfor %}
+    {% else %}
+        <p>No classes scheduled for today.</p>
+    {% endif %}
+</body>
+</html>

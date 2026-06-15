@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>HOD Dashboard</title>
+    <meta http-equiv="refresh" content="30">
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 600px; margin: 50px auto; padding: 20px; }
+        .alert { background: #fff3cd; border: 1px solid #ffc107; padding: 20px; margin: 15px 0; border-radius: 8px; }
+        .all-good { background: #d4edda; border: 1px solid #28a745; padding: 20px; border-radius: 8px; }
+    </style>
+</head>
+<body>
+    <h2>HOD Dashboard</h2>
+    <p>Today: {{ today }}</p>
+    {% if no_response %}
+        <h3 style="color: #dc3545;">No Response from Faculty</h3>
+        {% for cls in no_response %}
+        <div class="alert">
+            <strong>{{ cls.subject }}</strong> at {{ cls.class_time }} - Faculty has not responded!
+        </div>
+        {% endfor %}
+    {% else %}
+        <div class="all-good">
+            All faculty have responded for today's classes.
+        </div>
+    {% endif %}
+</body>
+</html>
