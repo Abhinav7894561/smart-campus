@@ -11,7 +11,7 @@ db.init_app(app)
 
 @app.route('/')
 def home():
-    return 'Server is live'
+    return render_template('home.html')
 
 @app.route('/faculty')
 def faculty():
