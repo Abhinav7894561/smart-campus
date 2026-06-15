@@ -34,6 +34,7 @@ def student():
         class_data.append({
             'subject': cls.subject,
             'class_time': cls.class_time,
+            'classroom_no': cls.classroom_no,
             'status': status.status if status else 'pending',
             'substitute_name': status.substitute_name if status else ''
         })
@@ -80,7 +81,8 @@ def add_class():
     faculty_name = request.form.get('faculty_name')
     class_time = request.form.get('class_time')
     day_of_week = request.form.get('day_of_week')
-    new_class = Schedule(subject=subject, faculty_name=faculty_name, class_time=class_time, day_of_week=day_of_week)
+    classroom_no = request.form.get('classroom_no')
+    new_class = Schedule(subject=subject, faculty_name=faculty_name, class_time=class_time, day_of_week=day_of_week, classroom_no=classroom_no)
     db.session.add(new_class)
     db.session.commit()
     return redirect(url_for('timetable'))
@@ -92,6 +94,7 @@ def delete_class(schedule_id):
         db.session.delete(cls)
         db.session.commit()
     return redirect(url_for('timetable'))
+
 @app.route('/preconfirm')
 def preconfirm():
     from datetime import timedelta

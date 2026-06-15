@@ -9,6 +9,7 @@ class Schedule(db.Model):
     faculty_name = db.Column(db.String(100), nullable=False)
     class_time = db.Column(db.String(10), nullable=False)
     day_of_week = db.Column(db.String(10), nullable=False)
+    classroom_no = db.Column(db.String(20), nullable=True)
 
 class ClassStatus(db.Model):
     id = db.Column(db.Integer, primary_key=True)

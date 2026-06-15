@@ -25,6 +25,7 @@
         <div class="class-card {{ cls.status }}">
             <h3>{{ cls.subject }}</h3>
             <p>Time: {{ cls.class_time }}</p>
+            <p>Room: {{ cls.classroom_no or 'Not assigned' }}</p>
             <span class="badge badge-{{ cls.status }}">
                 {% if cls.status == 'happening' %}Class is ON
                 {% elif cls.status == 'cancelled' %}Class CANCELLED

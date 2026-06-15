@@ -20,6 +20,7 @@
         <div class="class-card">
             <h3>{{ cls.subject }}</h3>
             <p>Time: {{ cls.class_time }}</p>
+            <p>Room: {{ cls.classroom_no or 'Not assigned' }}</p>
             <form action="/respond/{{ cls.id }}" method="POST">
                 <button class="btn btn-yes" name="status" value="happening">Yes, I'm Coming</button>
                 <button class="btn btn-no" name="status" value="cancelled">No, Cancel Class</button>
